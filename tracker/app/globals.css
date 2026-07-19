@@ -47,3 +47,25 @@ main {
   margin-top: 0;
   text-align: center;
 }
+
+.calender-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: bold;
+  color: #bbbbbb;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: felx;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #3a3a3a;
+}
