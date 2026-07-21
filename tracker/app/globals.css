@@ -29,7 +29,7 @@ main {
   min-height: 100vh;
 }
 
-.calender-card {
+.calendar-card {
   width: 340px;
   min-height: 420px;
 
@@ -43,12 +43,12 @@ main {
   box-sizing: border-box;
 }
 
-.calender-card h2 {
+.calendar-card h2 {
   margin-top: 0;
   text-align: center;
 }
 
-.calender-grid {
+.calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
