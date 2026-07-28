@@ -1,7 +1,11 @@
-export default function AddButton() {
+type AddButtonProps = {
+	onCLick: () => void;
+};
+
+export default function AddButton({ onClick }: AddButtonProps) {
 	return (
-		<button>
-			+ Add Item
+		<button onClick={onClick}>
+			+ Add Tracker
 		</button>
 	);
 }

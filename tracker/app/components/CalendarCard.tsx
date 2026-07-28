@@ -7,8 +7,8 @@ export default function CalendarCard({
 	month,
 	year,
 }: CalendarCardProps) {
-	const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "So"];
-	const monthName = new Date(year, month).toLocaleString("de-DE", {
+	const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+	const monthName = new Date(year, month).toLocaleString("en-US", {
 		month: "long",
 	});
 	const daysInMonth = new Date(year, month + 1, 0).getDate();
