@@ -4,8 +4,9 @@ type AddButtonProps = {
 
 export default function AddButton({ onClick }: AddButtonProps) {
 	return (
-		<button onClick={onClick}>
-			+ Add Tracker
+		<button className="add-button" onClick={onClick}>
+			+
 		</button>
 	);
 }
+

@@ -26,7 +26,11 @@ body {
 }
 
 main {
-  min-height: 100vh;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #f4f0e8;
 }
 
 .calendar-card {
@@ -68,4 +72,17 @@ main {
   align-items: center;
   border-radius: 10px;
   background: #3a3a3a;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
 }
