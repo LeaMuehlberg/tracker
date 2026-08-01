@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddButton from "./components/AddButton";
 import DraggableCalendar from "./components/DraggableCalendar"
 
@@ -15,6 +15,19 @@ type Card = {
 
 export default function Home() {
   const [cards, setCards] = useState<Card[]>([]);
+  useEffect(() => {
+    const savedCards = localStorage.getItem("calendar-cards");
+    if (savedCards) {
+      setCards(JSON.parse(savedCards));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "calendar-cards",
+      JSON.stringify(cards)
+    );
+  }, [cards]);
 
   function addCard() {
     const today = new Date();
@@ -30,29 +43,34 @@ export default function Home() {
 
     setCards([...cards, newCard]);
   }
+
   return (
     <main>
       {cards.map((card) => (
-        <div
-          key={card.id}
-          style={{
-            position: "absolute",
-            left: card.x,
-            top: card.y,
-          }}
-        >
           <DraggableCalendar
+            key={card.id}
             month={card.month}
             year={card.year}
             x={card.x}
             y={card.y}
-          />
 
-        </div>
+            onMove={(x, y) => {
+              setCards((oldCards) =>
+                oldCards.map((oldCard) =>
+                  oldCard.id === card.id
+                    ? {
+                        ...oldCard,
+                        x,
+                        y,
+                      }
+                    : oldCard
+                )
+              );
+            }}
+          />
       ))}
 
-      <AddButton onClick={addCard}/>
+      <AddButton onClick={addCard} />
     </main>
   );
 }
-

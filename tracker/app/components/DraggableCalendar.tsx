@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import CalendarCard from "./CalendarCard";
 
 type DraggableCalendarProps = {
@@ -8,6 +7,8 @@ type DraggableCalendarProps = {
 	year: number;
 	x: number;
 	y: number;
+
+	onMove: (x: number, y:number) => void;
 };
 
 export default function DraggableCalendar({
@@ -15,36 +16,39 @@ export default function DraggableCalendar({
 	year,
 	x,
 	y,
+	onMove,
 }: DraggableCalendarProps) {
-	const [position, setPosition] = useState({
-		x,
-		y,
-	});
-
-	const [dragging, setDragging] = useState(false);
-
 	function handleMouseDown(
 		event: React.MouseEvent<HTMLDivElement>
 	) {
-		setDragging(true);
-
 		const startX = event.clientX;
 		const startY = event.clientY;
 
-		const startPosition = position;
+		const startPosition = {
+			x,
+			y,
+		};
 
 		function handleMouseMove(
 			moveEvent: MouseEvent
 		) {
-			setPosition({
-				x: startPosition.x + moveEvent.clientX - startX,
-				y: startPosition.y + moveEvent.clientY - startY,
-			});
+			onMove(
+				startPosition.x + (moveEvent.clientX - startX) * 0.5,
+				startPosition.y + (moveEvent.clientY - startY) * 0.5
+			);
+		}
+
+		function handleMouseMove(
+			moveEvent: MouseEvent
+		) {
+			onMove(
+				startPosition.x + moveEvent.clientX - startX,
+				startPosition.y + moveEvent.clientY - startY
+			);
 		}
 
 		function handleMouseUp() {
-			setDragging(false);
-
+			
 			window.removeEventListener(
 				"mousemove",
 				handleMouseMove
@@ -72,10 +76,9 @@ export default function DraggableCalendar({
 			onMouseDown={handleMouseDown}
 			style={{
 				position: "absolute",
-				left: position.x,
-				top: position.y,
-
-				cursor: dragging ? "grabbing" : "grab",
+				left: x,
+				top: y,
+				cursor: "grab",
 			}}
 		>
 			<CalendarCard
